@@ -98,5 +98,8 @@ def evaluate_model(model, X_test, y_test):
     plt.tight_layout()
     plt.show()
 
+def download_results(report_df):
+    return report_df.to_csv(index=True)
+
     report = classification_report(y_test, y_pred, output_dict=True)
     return pd.DataFrame(report).T.round(4)
