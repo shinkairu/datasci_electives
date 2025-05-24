@@ -6,55 +6,59 @@ import os
 import base64
 from PIL import Image
 
-# Page config
+# --- Page config ---
 st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide")
 
-bg_img = Image.open("background.png")  # rename & store locally
-st.image(bg_img, use_column_width=True)
-
-.replace("{base64_image}", base64_image)
-
-# Custom CSS styling for a purple-themed interface with motion and background image
+# --- Load background image (from miscellaneous folder) ---
 image_path = "miscellaneous/background.png"
 if os.path.exists(image_path):
     with open(image_path, "rb") as img_file:
         base64_image = base64.b64encode(img_file.read()).decode()
 else:
     base64_image = ""
-    
-    }
-    .main {
+
+# --- Custom CSS styling with embedded background ---
+st.markdown(f"""
+    <style>
+    body {{
+        background-color: #1e002f;
+        background-image: url('data:image/png;base64,{base64_image}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+    .main {{
         background-color: rgba(255, 255, 255, 0.95);
         border-radius: 12px;
         padding: 2rem;
         animation: fadeIn 1s ease-in-out;
-    }
-    h1, h2, h3, h4 {
+    }}
+    h1, h2, h3, h4 {{
         color: #ba68c8;
-    }
-    .stButton>button {
+    }}
+    .stButton>button {{
         background-color: #7e57c2;
         color: white;
         border-radius: 8px;
         padding: 0.5rem 1rem;
         transition: 0.3s;
-    }
-    .stButton>button:hover {
+    }}
+    .stButton>button:hover {{
         background-color: #512da8;
-    }
-    .stSlider > div[data-baseweb="slider"] > div {
+    }}
+    .stSlider > div[data-baseweb="slider"] > div {{
         background: linear-gradient(90deg, #8e24aa, #ce93d8);
-    }
-    .stDataFrame thead tr th {
+    }}
+    .stDataFrame thead tr th {{
         background-color: #f3e5f5;
         color: #4a148c;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+    }}
+    @keyframes fadeIn {{
+        from {{ opacity: 0; }}
+        to {{ opacity: 1; }}
+    }}
     </style>
-""".replace("{base64_image}", base64.b64encode(open("/mnt/data/3a108fb6-884d-4af6-b569-a3da2c10aad9.png", "rb").read()).decode()), unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # Tabs for Dashboard and Result
 tabs = st.tabs(["📊 Dashboard", "📈 Results"])
