@@ -2,6 +2,7 @@ import streamlit as st
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
 from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
+import os
 import base64
 from PIL import Image
 
@@ -13,14 +14,13 @@ st.image(bg_img, use_column_width=True)
 
 
 # Custom CSS styling for a purple-themed interface with motion and background image
-st.markdown("""
-    <style>
-    body {
-        background-color: #1e002f;
-        background-image: url('data:image/png;base64,{base64_image}');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
+image_path = "miscellaneous/background.png"
+if os.path.exists(image_path):
+    with open(image_path, "rb") as img_file:
+        base64_image = base64.b64encode(img_file.read()).decode()
+else:
+    base64_image = ""
+    
     }
     .main {
         background-color: rgba(255, 255, 255, 0.95);
