@@ -46,26 +46,35 @@ st.markdown(f"""
         color: #333;
     }}
 
+    /* --- Buttons --- */
     .stButton>button {{
-        background-color: #7e57c2;
+        background: #7b1fa2;
         color: white;
+        padding: 0.6rem 1.2rem;
         border-radius: 8px;
-        padding: 0.5rem 1rem;
-        transition: 0.3s;
+        border: none;
+        transition: transform 0.2s ease;
     }}
     .stButton>button:hover {{
-        background-color: #512da8;
+        background: #4a0072;
+        transform: scale(1.02);
     }}
+
+    /* --- Sliders --- */
     .stSlider > div[data-baseweb="slider"] > div {{
         background: linear-gradient(90deg, #8e24aa, #ce93d8);
     }}
+
+    /* --- DataFrame header --- */
     .stDataFrame thead tr th {{
         background-color: #f3e5f5;
         color: #4a148c;
     }}
+
+    /* --- Motion --- */
     @keyframes fadeIn {{
-        from {{ opacity: 0; }}
-        to {{ opacity: 1; }}
+        from {{ opacity: 0; transform: translateY(10px); }}
+        to {{ opacity: 1; transform: translateY(0); }}
     }}
     </style>
 """, unsafe_allow_html=True)
