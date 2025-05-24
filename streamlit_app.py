@@ -86,6 +86,29 @@ with tabs[0]:
     X = df.drop(columns=[target])
     y = df[target]
 
+    left, center, right = st.columns([1, 2, 1])
+    with center:
+        col1, col2 = st.columns(2)
+        with col1:
+            test_size = st.slider("Test set size (%)", 10, 50, 30)
+        with col2:
+            random_state = st.number_input("Random seed", value=42)
+
+        if st.button("🚀 Train Model"):
+            X_train, X_test, y_train, y_test = train_test_split(
+                X, y, test_size=test_size / 100, random_state=random_state, stratify=y
+            )
+            model = XGBClassifier(use_label_encoder=False, eval_metric="logloss")
+            model.fit(X_train, y_train)
+
+            st.session_state.model = model
+            st.session_state.X_test = X_test
+            st.session_state.y_test = y_test
+            st.session_state.trained = True
+            st.success("✅ Model trained successfully! Check 'Results' tab for output.")
+
+    st.markdown("""</div>""", unsafe_allow_html=True)
+
 with tabs[1]:
     if st.session_state.get("trained", False):
         st.markdown("""
