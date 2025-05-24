@@ -140,7 +140,7 @@ with tabs[1]:
         report_df = evaluate_model(model, X_test, y_test)
 
         st.write("### 📋 Classification Report")
-        st.dataframe(report_df.style.background_gradient(cmap='Purples'), use_container_width=True)
+        st.dataframe(report_df, use_container_width=True)
 
         # Download button
         csv = download_results(report_df)
