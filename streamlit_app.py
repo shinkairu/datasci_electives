@@ -1,8 +1,12 @@
 import streamlit as st
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
-from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
+
+import sys
 import os
+sys.path.append(os.path.dirname(__file__))
+from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
+
 import base64
 from PIL import Image
 
