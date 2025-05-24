@@ -10,12 +10,21 @@ from PIL import Image
 st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide")
 
 # --- Load background image (from miscellaneous folder) ---
-image_path = "/content/lucy.png"
+image_path = "miscellaneous/lucy.png"
 if os.path.exists(image_path):
-    with open(image_path, "rb") as img_file:
-        base64_image = base64.b64encode(img_file.read()).decode()
-else:
-    base64_image = ""
+    with open(image_path, "rb") as f:
+        base64_image = base64.b64encode(f.read()).decode()
+    background_style = f"""
+        <style>
+        body {{
+            background-image: url("data:image/png;base64,{base64_image}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+    """
+    st.markdown(background_style, unsafe_allow_html=True)
 
 # --- Custom CSS styling with embedded background ---
 st.markdown(f"""
