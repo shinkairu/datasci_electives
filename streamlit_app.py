@@ -3,9 +3,14 @@ from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
 from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
 import base64
+from PIL import Image
 
 # Page config
 st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide")
+
+bg_img = Image.open("background.png")  # rename & store locally
+st.image(bg_img, use_column_width=True)
+
 
 # Custom CSS styling for a purple-themed interface with motion and background image
 st.markdown("""
