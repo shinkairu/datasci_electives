@@ -89,7 +89,7 @@ with tabs[0]:
     st.title("💳 Credit Card Fraud Detection Dashboard")
     st.write("A visual and interactive way to explore fraud detection using machine learning.")
 
-    if st.checkbox("Show Dataset Preview"):
+    if st.toggle("Show Dataset Preview"):
         st.subheader("🔍 Dataset Preview")
         st.dataframe(df.head(), use_container_width=True)
 
