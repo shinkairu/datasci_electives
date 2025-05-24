@@ -6,6 +6,8 @@ import os
 import base64
 from PIL import Image
 
+.replace("{base64_image}", base64_image)
+
 # Page config
 st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide")
 
