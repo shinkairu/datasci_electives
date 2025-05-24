@@ -10,7 +10,7 @@ from PIL import Image
 st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide")
 
 # --- Load background image (from miscellaneous folder) ---
-image_path = "miscellaneous/background.png"
+image_path = "background.png"
 if os.path.exists(image_path):
     with open(image_path, "rb") as img_file:
         base64_image = base64.b64encode(img_file.read()).decode()
