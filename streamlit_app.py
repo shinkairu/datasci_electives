@@ -6,14 +6,13 @@ import os
 import base64
 from PIL import Image
 
-.replace("{base64_image}", base64_image)
-
 # Page config
 st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide")
 
 bg_img = Image.open("background.png")  # rename & store locally
 st.image(bg_img, use_column_width=True)
 
+.replace("{base64_image}", base64_image)
 
 # Custom CSS styling for a purple-themed interface with motion and background image
 image_path = "miscellaneous/background.png"
