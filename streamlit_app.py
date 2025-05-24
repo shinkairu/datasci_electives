@@ -20,22 +20,32 @@ else:
 # --- Custom CSS styling with embedded background ---
 st.markdown(f"""
     <style>
+    /* --- Global background --- */
     body {{
-        background-color: #1e002f;
-        background-image: url('data:image/png;base64,{base64_image}');
+        background: url("data:image/png;base64,{base64_image}") no-repeat center center fixed;
         background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
+        font-family: 'Segoe UI', sans-serif;
     }}
+    
+    /* --- Main content card --- */
     .main {{
-        background-color: rgba(255, 255, 255, 0.95);
-        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 20px;
         padding: 2rem;
-        animation: fadeIn 1s ease-in-out;
+        margin: 2rem;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1.2s ease-in-out;
     }}
-    h1, h2, h3, h4 {{
-        color: #ba68c8;
+
+    /* --- Typography --- */
+    h1, h2, h3 {{
+        color: #6a1b9a;
+        margin-bottom: 0.5rem;
     }}
+    p, label, span {{
+        color: #333;
+    }}
+
     .stButton>button {{
         background-color: #7e57c2;
         color: white;
