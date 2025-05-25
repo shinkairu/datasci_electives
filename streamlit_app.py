@@ -14,26 +14,6 @@ from PIL import Image
 st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide")
 
 @st.cache(allow_output_mutation=True)
-def get_base64_of_bin_file(datasci_electives/lucy.png):
-    with open(datasci_electives/lucy.png, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
-
-def set_png_as_page_bg(datasci_electives/lucy.png):
-    bin_str = get_base64_of_bin_file(datasci_electives/lucy.png)
-    page_bg_img = f'''
-    <style>
-    body {{
-        background-image: url("data:image/png;base64,{bin_str}");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }}
-    </style>
-    '''
-    st.markdown(page_bg_img, unsafe_allow_html=True)
-
-@st.cache(allow_output_mutation=True)
 def get_base64_of_bin_file(image_path):
     with open(image_path, 'rb') as f:
         data = f.read()
@@ -52,6 +32,14 @@ def set_png_as_page_bg(image_path):
     </style>
     '''
     st.markdown(page_bg_img, unsafe_allow_html=True)
+
+# Use absolute path based on current file's directory
+image_path = os.path.join(os.path.dirname(__file__), "lucy.png")
+if os.path.exists(image_path):
+    set_png_as_page_bg(image_path)
+else:
+    st.warning("⚠️ Background image 'lucy.png' not found.")
+
 
 # Use absolute path based on current file's directory
 image_path = os.path.join(os.path.dirname(__file__), "lucy.png")
