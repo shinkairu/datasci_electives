@@ -39,7 +39,7 @@ def set_background(image_path):
     }}
     h1, h2, h3 {{
         color: #000000;
-        text-shadow: 1px 1px #ffffff;
+        text-shadow: 1px 1px #000000;
     }}
     .stButton>button {{
         background-color: #7b1fa2;
