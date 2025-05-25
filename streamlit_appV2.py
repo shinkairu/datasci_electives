@@ -38,7 +38,7 @@ def set_background(image_path):
         animation: fadeIn 1.2s ease-in-out;
     }}
     h1, h2, h3 {{
-        color: #4A0072;
+        color: #000000;
         text-shadow: 1px 1px #ffffff;
     }}
     .stButton>button {{
