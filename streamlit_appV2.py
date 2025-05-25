@@ -126,52 +126,44 @@ with tab2:
         st.markdown("### 📋 Classification Report")
         st.dataframe(report_df, use_container_width=True)
 
-        # --- Confusion Matrix ---
-        st.markdown("### 🔍 Confusion Matrix")
-        from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-        import matplotlib.pyplot as plt
+        # --- Generate subplots ---
+        col1, col2 = st.columns(2)
 
-        y_pred = model.predict(X_test)
-        cm = confusion_matrix(y_test, y_pred, labels=[0, 1])
+        with col1:
+            st.markdown("#### 🔍 Confusion Matrix")
+            cm = confusion_matrix(y_test, y_pred, labels=[0, 1])
+            fig_cm, ax_cm = plt.subplots(figsize=(4, 4))
+            disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[0, 1])
+            disp.plot(ax=ax_cm, cmap="Purples", colorbar=False)
+            st.pyplot(fig_cm)
 
-        fig_cm, ax_cm = plt.subplots()
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[0, 1])
-        disp.plot(ax=ax_cm, cmap="Purples")
-        st.pyplot(fig_cm)
+        with col2:
+            st.markdown("#### 🧠 ROC Curve")
+            fpr, tpr, _ = roc_curve(y_test, y_prob)
+            roc_auc = auc(fpr, tpr)
 
-        # --- ROC Curve ---
-        st.markdown("### 🧠 ROC Curve")
-        from sklearn.metrics import roc_curve, auc
-        import numpy as np
+            fig_roc, ax_roc = plt.subplots(figsize=(4, 4))
+            ax_roc.plot(fpr, tpr, color='darkorange', lw=2, label=f'AUC = {roc_auc:.2f}')
+            ax_roc.plot([0, 1], [0, 1], color='navy', linestyle='--')
+            ax_roc.set_xlabel("False Positive Rate")
+            ax_roc.set_ylabel("True Positive Rate")
+            ax_roc.set_title("ROC Curve")
+            ax_roc.legend(loc="lower right")
+            st.pyplot(fig_roc)
 
-        y_prob = model.predict_proba(X_test)[:, 1]
-        fpr, tpr, _ = roc_curve(y_test, y_prob)
-        roc_auc = auc(fpr, tpr)
+        col3, col4 = st.columns([1, 1])
 
-        fig_roc, ax_roc = plt.subplots()
-        ax_roc.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (AUC = %0.2f)' % roc_auc)
-        ax_roc.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-        ax_roc.set_xlim([0.0, 1.0])
-        ax_roc.set_ylim([0.0, 1.05])
-        ax_roc.set_xlabel('False Positive Rate')
-        ax_roc.set_ylabel('True Positive Rate')
-        ax_roc.set_title('Receiver Operating Characteristic')
-        ax_roc.legend(loc="lower right")
-        st.pyplot(fig_roc)
+        with col3:
+            st.markdown("#### 🔄 Precision-Recall Curve")
+            precision, recall, _ = precision_recall_curve(y_test, y_prob)
 
-        # --- Precision-Recall Curve ---
-        st.markdown("### 🔄 Precision-Recall Curve")
-        from sklearn.metrics import precision_recall_curve
-
-        precision, recall, _ = precision_recall_curve(y_test, y_prob)
-
-        fig_pr, ax_pr = plt.subplots()
-        ax_pr.plot(recall, precision, color="blue", lw=2)
-        ax_pr.set_xlabel("Recall")
-        ax_pr.set_ylabel("Precision")
-        ax_pr.set_title("Precision-Recall Curve")
-        st.pyplot(fig_pr)
-
+            fig_pr, ax_pr = plt.subplots(figsize=(4, 4))
+            ax_pr.plot(recall, precision, color="blue", lw=2)
+            ax_pr.set_xlabel("Recall")
+            ax_pr.set_ylabel("Precision")
+            ax_pr.set_title("Precision-Recall")
+            st.pyplot(fig_pr)
+            
         # --- Download Button ---
         csv = download_results(report_df)
         b64 = base64.b64encode(csv.encode()).decode()
@@ -180,6 +172,4 @@ with tab2:
 
         st.markdown("</div>", unsafe_allow_html=True)
     else:
-        st.warning("⚠️ Please train the model in the Dashboard tab.")
-
-        st.warning("⚠️ Train the model first in the Dashboard tab.")
+        st.warning("⚠️ Please train the model first in the Dashboard tab.")
