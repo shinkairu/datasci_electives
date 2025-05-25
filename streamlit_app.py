@@ -15,13 +15,13 @@ st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide")
 
 # --- Load background image ---
 @st.cache(allow_output_mutation=True)
-def get_base64_of_bin_file(bin_file):
-    with open(bin_file, 'rb') as f:
+def get_base64_of_bin_file(datasci_electives/lucy.png):
+    with open(datasci_electives/lucy.png, 'rb') as f:
         data = f.read()
     return base64.b64encode(data).decode()
 
-def set_png_as_page_bg(lucy.png):
-    bin_str = get_base64_of_bin_file(lucy.png)
+def set_png_as_page_bg(datasci_electives/lucy.png):
+    bin_str = get_base64_of_bin_file(datasci_electives/lucy.png)
     page_bg_img = '''
     <style>
     body {
