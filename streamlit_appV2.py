@@ -73,44 +73,74 @@ df = load_and_clean_data()
 tab1, tab2 = st.tabs(["💳 Dashboard", "📈 Results"])
 
 with tab1:
-    st.markdown('<div class="main-container">', unsafe_allow_html=True)
+    if st.session_state.get("trained", False):
+        st.markdown('<div class="main">', unsafe_allow_html=True)
 
-    st.title("Lucy's Fraud Detection AI")
-    st.subheader("🔍 Powered by XGBoost | Smart Detection for Smarter Security")
+        st.markdown("## 📈 Evaluation & Report")
+        model = st.session_state.model
+        X_test = st.session_state.X_test
+        y_test = st.session_state.y_test
 
-    if st.toggle("📁 Show Raw Dataset"):
-        st.dataframe(df.head(), use_container_width=True)
+        # --- Classification Report as DataFrame ---
+        report_df = evaluate_model(model, X_test, y_test)
+        st.markdown("### 📋 Classification Report")
+        st.dataframe(report_df, use_container_width=True)
 
-    with st.expander("📊 Run Data Exploration"):
-        explore_data(df)
+        # --- Confusion Matrix ---
+        st.markdown("### 🔍 Confusion Matrix")
+        from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+        import matplotlib.pyplot as plt
 
-    st.markdown("### 🤖 Train Model")
+        y_pred = model.predict(X_test)
+        cm = confusion_matrix(y_test, y_pred, labels=[0, 1])
 
-    target = "Class"
-    X = df.drop(columns=[target])
-    y = df[target]
+        fig_cm, ax_cm = plt.subplots()
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[0, 1])
+        disp.plot(ax=ax_cm, cmap="Purples")
+        st.pyplot(fig_cm)
 
-    col1, col2 = st.columns(2)
-    with col1:
-        test_size = st.slider("Test Set Size (%)", 10, 50, 30)
-    with col2:
-        random_state = st.number_input("Random Seed", min_value=0, value=42)
+        # --- ROC Curve ---
+        st.markdown("### 🧠 ROC Curve")
+        from sklearn.metrics import roc_curve, auc
+        import numpy as np
 
-    if st.button("🚀 Train XGBoost Model"):
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=test_size / 100, random_state=random_state, stratify=y
-        )
+        y_prob = model.predict_proba(X_test)[:, 1]
+        fpr, tpr, _ = roc_curve(y_test, y_prob)
+        roc_auc = auc(fpr, tpr)
 
-        model = XGBClassifier(use_label_encoder=False, eval_metric="logloss")
-        model.fit(X_train, y_train)
+        fig_roc, ax_roc = plt.subplots()
+        ax_roc.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (AUC = %0.2f)' % roc_auc)
+        ax_roc.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+        ax_roc.set_xlim([0.0, 1.0])
+        ax_roc.set_ylim([0.0, 1.05])
+        ax_roc.set_xlabel('False Positive Rate')
+        ax_roc.set_ylabel('True Positive Rate')
+        ax_roc.set_title('Receiver Operating Characteristic')
+        ax_roc.legend(loc="lower right")
+        st.pyplot(fig_roc)
 
-        st.session_state.model = model
-        st.session_state.X_test = X_test
-        st.session_state.y_test = y_test
-        st.session_state.trained = True
-        st.success("✅ Model trained! Check the Results tab.")
+        # --- Precision-Recall Curve ---
+        st.markdown("### 🔄 Precision-Recall Curve")
+        from sklearn.metrics import precision_recall_curve
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        precision, recall, _ = precision_recall_curve(y_test, y_prob)
+
+        fig_pr, ax_pr = plt.subplots()
+        ax_pr.plot(recall, precision, color="blue", lw=2)
+        ax_pr.set_xlabel("Recall")
+        ax_pr.set_ylabel("Precision")
+        ax_pr.set_title("Precision-Recall Curve")
+        st.pyplot(fig_pr)
+
+        # --- Download Button ---
+        csv = download_results(report_df)
+        b64 = base64.b64encode(csv.encode()).decode()
+        href = f'<a href="data:file/csv;base64,{b64}" download="fraud_model_report.csv">📥 Download Results as CSV</a>'
+        st.markdown(href, unsafe_allow_html=True)
+
+        st.markdown("</div>", unsafe_allow_html=True)
+    else:
+        st.warning("⚠️ Please train the model in the Dashboard tab.")
 
 with tab2:
     if st.session_state.get("trained", False):
