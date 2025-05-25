@@ -14,21 +14,27 @@ from PIL import Image
 st.set_page_config(page_title="Fraud Detection Dashboard", layout="wide")
 
 # --- Load background image ---
-image_path = "/datasci_electives/lucy.png"
-if os.path.exists(image_path):
-    with open(image_path, "rb") as f:
-        base64_image = base64.b64encode(f.read()).decode()
-    background_style = f"""
-        <style>
-        body {{
-            background-image: url("data:image/png;base64,{base64_image}");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }}
-        </style>
-    """
-    st.markdown(background_style, unsafe_allow_html=True)
+@st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+def set_png_as_page_bg(lucy.png):
+    bin_str = get_base64_of_bin_file(lucy.png)
+    page_bg_img = '''
+    <style>
+    body {
+    background-image: url("data:image/png;base64,%s");
+    background-size: cover;
+    }
+    </style>
+    ''' % bin_str
+    
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+    return
+
+set_png_as_page_bg('background.png')
 
 # --- Custom CSS styling with embedded background ---
 st.markdown(f"""
