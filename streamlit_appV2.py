@@ -73,6 +73,46 @@ df = load_and_clean_data()
 tab1, tab2 = st.tabs(["💳 Dashboard", "📈 Results"])
 
 with tab1:
+    st.markdown('<div class="main-container">', unsafe_allow_html=True)
+
+    st.title("Lucy's Fraud Detection AI")
+    st.subheader("🔍 Powered by XGBoost | Smart Detection for Smarter Security")
+
+    if st.toggle("📁 Show Raw Dataset"):
+        st.dataframe(df.head(), use_container_width=True)
+
+    with st.expander("📊 Run Data Exploration"):
+        explore_data(df)
+
+    st.markdown("### 🤖 Train Model")
+
+    target = "Class"
+    X = df.drop(columns=[target])
+    y = df[target]
+
+    col1, col2 = st.columns(2)
+    with col1:
+        test_size = st.slider("Test Set Size (%)", 10, 50, 30)
+    with col2:
+        random_state = st.number_input("Random Seed", min_value=0, value=42)
+
+    if st.button("🚀 Train XGBoost Model"):
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=test_size / 100, random_state=random_state, stratify=y
+        )
+
+        model = XGBClassifier(use_label_encoder=False, eval_metric="logloss")
+        model.fit(X_train, y_train)
+
+        st.session_state.model = model
+        st.session_state.X_test = X_test
+        st.session_state.y_test = y_test
+        st.session_state.trained = True
+        st.success("✅ Model trained! Check the Results tab.")
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with tab2:
     if st.session_state.get("trained", False):
         st.markdown('<div class="main">', unsafe_allow_html=True)
 
@@ -142,25 +182,4 @@ with tab1:
     else:
         st.warning("⚠️ Please train the model in the Dashboard tab.")
 
-with tab2:
-    if st.session_state.get("trained", False):
-        st.markdown('<div class="main-container">', unsafe_allow_html=True)
-        st.subheader("📈 Model Evaluation")
-
-        model = st.session_state.model
-        X_test = st.session_state.X_test
-        y_test = st.session_state.y_test
-
-        report_df = evaluate_model(model, X_test, y_test)
-
-        st.markdown("### 📋 Classification Report")
-        st.dataframe(report_df, use_container_width=True)
-
-        csv = download_results(report_df)
-        b64 = base64.b64encode(csv.encode()).decode()
-        href = f'<a href="data:file/csv;base64,{b64}" download="lucy_fraud_report.csv">📥 Download CSV</a>'
-        st.markdown(href, unsafe_allow_html=True)
-
-        st.markdown('</div>', unsafe_allow_html=True)
-    else:
         st.warning("⚠️ Train the model first in the Dashboard tab.")
