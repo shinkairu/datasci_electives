@@ -20,8 +20,8 @@ def get_base64_of_bin_file(datasci_electives/lucy.png):
         data = f.read()
     return base64.b64encode(data).decode()
 
-def set_png_as_page_bg(datasci_electives/lucy.png):
-    bin_str = get_base64_of_bin_file(datasci_electives/lucy.png)
+def set_png_as_page_bg(lucy.png):
+    bin_str = get_base64_of_bin_file(lucy.png)
     page_bg_img = '''
     <style>
     body {
