@@ -98,7 +98,7 @@ def evaluate_model(model, X_test, y_test):
     plt.tight_layout()
     plt.show()
 
-     return metrics_df
+    return metrics_df
 
 def download_results(report_df):
     return report_df.to_csv(index=False)
