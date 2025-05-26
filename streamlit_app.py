@@ -32,29 +32,22 @@ def set_background(image_path):
         background-attachment: fixed;
         background-repeat: no-repeat;
     }}
-    .main-container {{
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 16px;
-        padding: 3rem;
-        margin-top: 2rem;
+    .main-tab-container {{
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem 0;
         box-shadow: 0 0 25px rgba(0,0,0,0.15);
         animation: fadeIn 1.2s ease-in-out;
     }}
-    .main-tab-container {{
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 16px;
-        padding: 2rem;
-        margin-top: 1.5rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 0 20px rgba(0,0,0,0.12);
-        animation: fadeIn 0.8s ease-in-out;
-    }}
     .info-box {{
-        background: rgba(255, 255, 255, 0.65);
-        border-radius: 12px;
-        padding: 1.2rem 1.5rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-left: 6px solid #7b1fa2;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
         margin-bottom: 1.5rem;
-        box-shadow: 0 0 10px rgba(0,0,0,0.08);
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }}
     h1, h2, h3 {{
         color: #4A0072;
@@ -66,7 +59,7 @@ def set_background(image_path):
         font-size: 18px !important;
         font-family: 'Segoe UI', sans-serif;
     }}
-    .stButton>button {{   
+    .stButton>button {{
         background-color: #7b1fa2;
         color: white;
         border-radius: 10px;
@@ -79,8 +72,8 @@ def set_background(image_path):
         background-color: #4a0072;
     }}
     @keyframes fadeIn {{
-        from {{ opacity: 0; transform: translateY(20px); }}
-        to {{ opacity: 1; transform: translateY(0); }}
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }}
     </style>
     """
@@ -98,6 +91,13 @@ df = load_and_clean_data()
 tabs = st.tabs(["🏠 HOME", "🔬 PROTOTYPE", "📬 CONTACT"])
 
 with tabs[0]:
+    st.markdown("""
+<div class='info-box'>
+    <h3>✅ Test Box</h3>
+    <p>This is a test to see if the CSS box works.</p>
+</div>
+""", unsafe_allow_html=True)
+    
     st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
     st.title("Credit Card Fraud Detection Tool")
     
@@ -106,8 +106,8 @@ with tabs[0]:
     ### 🚀 This tool leverages **XGBoost** to detect fraudulent credit card transactions.
 
     st.markdown("<div class='info-box'>", unsafe_allow_html=True)
-    #### 📂 Dataset Info:
     st.markdown("""
+    #### 📂 Dataset Info:
     - This dataset involves real-world anonymized credit card data.
     - It has 31 features: principal components, amount, class.
     - Note: The dataset is highly imbalanced: only ~0.17% fraud cases.
@@ -193,11 +193,10 @@ with tabs[1]:
 with tabs[2]:
     st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
     st.title("📬 Contact")
-    st.markdown("""
-    **Developer**: Shinkairu  
-    **GitHub**: [github.com/shinkairu](https://github.com/shinkairu)  
-    **Email**: your_email@example.com  
+    
+    st.markdown("**Developer**: Shinkairu", unsafe_allow_html=True)
+    st.markdown("**GitHub**: [github.com/shinkairu](https://github.com/shinkairu)", unsafe_allow_html=True)
+    st.markdown("**Email**: your_email@example.com", unsafe_allow_html=True)
+    st.markdown("> This is a sample Streamlit prototype developed for educational and demonstration purposes.", unsafe_allow_html=True)
 
-    > This is a sample Streamlit prototype developed for educational and demonstration purposes.
-    """)
     st.markdown("</div>", unsafe_allow_html=True)
