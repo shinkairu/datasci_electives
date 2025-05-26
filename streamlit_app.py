@@ -104,30 +104,6 @@ with tabs[0]:
 
 # home tab
 with tabs[1]:
-    if st.session_state.get("trained", False):
-        st.markdown('<div class="main-container">', unsafe_allow_html=True)
-        st.subheader("📈 Model Evaluation")
-
-        model = st.session_state.model
-        X_test = st.session_state.X_test
-        y_test = st.session_state.y_test
-
-        report_df = evaluate_model(model, X_test, y_test)
-
-        st.markdown("### 📋 Classification Report")
-        st.dataframe(report_df, use_container_width=True)
-
-        csv = download_results(report_df)
-        b64 = base64.b64encode(csv.encode()).decode()
-        href = f'<a href="data:file/csv;base64,{b64}" download="lucy_fraud_report.csv">📥 Download CSV</a>'
-    st.markdown(href, unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    else:
-        st.warning("⚠️ Train the model first in the Dashboard tab.")
-
-# prototype tab
-with tabs[2]:
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
     st.subheader("📊 Dataset & EDA")
 
@@ -158,7 +134,7 @@ with tabs[2]:
         st.session_state.trained = True
         st.success("✅ Model trained successfully! Scroll down to view results.")
 
-    # added the 'results' as subsection
+    # added the 'results' as a subsection
     if st.session_state.get("trained", False):
         st.subheader("📈 Model Evaluation & Results")
 
@@ -178,7 +154,7 @@ with tabs[2]:
             st.markdown(href, unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
-    
+
 # contact info tab
 with tabs[2]:
     st.markdown("<div class='main-container'>", unsafe_allow_html=True)
