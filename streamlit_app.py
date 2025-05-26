@@ -135,7 +135,7 @@ with tabs[1]:
     if st.toggle("📁 Preview Dataset Head"):
         st.dataframe(df.head(), use_container_width=True)
 
-    with st.expander("📊 Run Exploratory Data Analysis (EDA)"):
+    with st.toggle("📊 Run Exploratory Data Analysis (EDA)"):
         with st.spinner("Running EDA..."):
             explore_data(df)
 
@@ -173,7 +173,6 @@ with tabs[1]:
             st.markdown("### 📋 Classification Report")
             st.dataframe(report_df, use_container_width=True)
 
-            # Add visualizations here
             st.markdown("### 📊 Confusion Matrix")
             st.pyplot(plot_confusion_matrix(model, X_test, y_test))
 
