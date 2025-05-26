@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(__file__))    # custom utilitiy function for bet
 from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
 
 sys.path.append(os.path.dirname(__file__))
-from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
+from app_utils import load_and_clean_data, explore_data, evaluate_model, show_feature_importance, download_results
 
 # --- Page Config ---
 st.set_page_config(page_title="Credit Card Fraud Detector 💳", layout="wide")
@@ -151,6 +151,9 @@ with tabs[1]:
 
             st.markdown("### 📈 ROC Curve")
             st.pyplot(plot_roc_curve(model, X_test, y_test))
+            
+            st.markdown("### 🔍 Feature Importance")
+            show_feature_importance(model)
 
             csv = download_results(report_df)
             b64 = base64.b64encode(csv.encode()).decode()
