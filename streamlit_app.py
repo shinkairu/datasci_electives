@@ -101,10 +101,14 @@ with tabs[0]:
     st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
     st.title("Credit Card Fraud Detection Tool")
     
+    # Intro Description
     st.markdown("<div class='info-box'>", unsafe_allow_html=True)
     st.markdown("""
     ### 🚀 This tool leverages **XGBoost** to detect fraudulent credit card transactions.
+    """, unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
+    # Dataset Info
     st.markdown("<div class='info-box'>", unsafe_allow_html=True)
     st.markdown("""
     #### 📂 Dataset Info:
@@ -114,17 +118,18 @@ with tabs[0]:
     """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
+    # Purpose
     st.markdown("<div class='info-box'>", unsafe_allow_html=True)
-    #### 💡 Purpose:
     st.markdown("""
+    #### 💡 Purpose:
     This prototype helps analysts:
-    - Explore data visually
-    - Train a fraud detection model
-    - View model evaluation metrics
+    - Explore data visually  
+    - Train a fraud detection model  
+    - View model evaluation metrics  
     """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True) 
 
 # home tab
 with tabs[1]:
