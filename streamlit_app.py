@@ -72,8 +72,8 @@ def set_background(image_path):
         background-color: #4a0072;
     }}
     @keyframes fadeIn {{
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {{ opacity: 0; transform: translateY(20px); }}
+        to {{ opacity: 1; transform: translateY(0); }}
     }}
     </style>
     """
