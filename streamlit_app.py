@@ -197,7 +197,7 @@ with tabs[2]:
     **Developer**: Shinkairu  
     **GitHub**: [github.com/shinkairu](https://github.com/shinkairu)  
     **Email**: your_email@example.com  
-
     > This is a sample Streamlit prototype developed for educational and demonstration purposes.
-    """)
+    """, unsafe_allow_html=True)
+    
     st.markdown("</div>", unsafe_allow_html=True)
