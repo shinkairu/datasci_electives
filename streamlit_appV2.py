@@ -9,6 +9,12 @@ import sys
 # --- Page Config ---
 st.set_page_config(page_title="Lucy’s AI Fraud Detector 💳", layout="wide")
 
+# --- Background image setup ---
+@st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(image_path):
+    with open(image_path, 'rb') as f:
+        return base64.b64encode(f.read()).decode()
+        
 def set_background(image_path):
     bin_str = get_base64_of_bin_file(image_path)
     css = f"""
