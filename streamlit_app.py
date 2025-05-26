@@ -191,15 +191,13 @@ with tabs[1]:
 
 # contact info tab
 with tabs[2]:
+with tabs[2]:
     st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
     st.title("📬 Contact")
-
-    st.markdown("""
-**Developer**: Shinkairu  
-**GitHub**: [github.com/shinkairu](https://github.com/shinkairu)  
-**Email**: your_email@example.com  
-
-> This is a sample Streamlit prototype developed for educational and demonstration purposes.
-""", unsafe_allow_html=True)  
+    
+    st.markdown("**Developer**: Shinkairu", unsafe_allow_html=True)
+    st.markdown("**GitHub**: [github.com/shinkairu](https://github.com/shinkairu)", unsafe_allow_html=True)
+    st.markdown("**Email**: your_email@example.com", unsafe_allow_html=True)
+    st.markdown("> This is a sample Streamlit prototype developed for educational and demonstration purposes.", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
