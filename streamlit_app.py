@@ -135,7 +135,7 @@ with tabs[1]:
     if st.toggle("📁 Preview Dataset Head"):
         st.dataframe(df.head(), use_container_width=True)
 
-    with st.toggle("📊 Run Exploratory Data Analysis (EDA)"):
+    with st.expander("📊 Run Exploratory Data Analysis (EDA)"):
         with st.spinner("Running EDA..."):
             explore_data(df)
 
