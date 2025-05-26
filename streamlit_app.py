@@ -17,7 +17,7 @@ from app_utils import load_and_clean_data, explore_data, evaluate_model, plot_co
 st.set_page_config(page_title="Credit Card Fraud Detector 💳", layout="wide")
 
 # --- Background image setup ---
-@st.cache(allow_output_mutation=True)
+@st.cache_resource(allow_output_mutation=True)
 def get_base64_of_bin_file(image_path):
     with open(image_path, 'rb') as f:
         return base64.b64encode(f.read()).decode()
