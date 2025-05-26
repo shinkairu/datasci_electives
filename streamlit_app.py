@@ -122,6 +122,7 @@ with tabs[1]:
         href = f'<a href="data:file/csv;base64,{b64}" download="lucy_fraud_report.csv">📥 Download CSV</a>'
     st.markdown(href, unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+    
     else:
         st.warning("⚠️ Train the model first in the Dashboard tab.")
 
