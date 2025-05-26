@@ -129,16 +129,16 @@ with tabs[0]:
 
 # home tab
 with tabs[1]:
-    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
-    
-    st.subheader("📊 Dataset & EDA")
+    st.title("📊 Dataset & EDA")
     if st.toggle("📁 Preview Dataset Head"):
         st.dataframe(df.head(), use_container_width=True)
 
     with st.expander("📊 Run Exploratory Data Analysis (EDA)"):
         with st.spinner("Running EDA..."):
             explore_data(df)
-
+            
+    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
+    
     st.subheader("⚙️ Train Fraud Detection Model")
     target = "Class"
     X = df.drop(columns=[target])
@@ -164,7 +164,7 @@ with tabs[1]:
     if st.session_state.get("trained", False):
         st.subheader("📈 Model Evaluation & Results")
 
-        if st.toggle("📋 Show Evaluation Report & Graphs"):
+        if st.expander("📋 Show Evaluation Report & Graphs"):
             model = st.session_state.model
             X_test = st.session_state.X_test
             y_test = st.session_state.y_test
