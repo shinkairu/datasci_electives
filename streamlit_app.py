@@ -91,7 +91,7 @@ df = load_and_clean_data()
 tabs = st.tabs(["🏠 HOME", "🔬 PROTOTYPE", "📬 CONTACT"])
 
 with tabs[0]:
-        st.markdown("""
+    st.markdown("""
     <div class='main-tab-container'>
         <h3>Alexine's Credit Card Fraud Detection Tool 💳</h3>
     </div>
