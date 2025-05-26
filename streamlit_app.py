@@ -40,6 +40,22 @@ def set_background(image_path):
         box-shadow: 0 0 25px rgba(0,0,0,0.15);
         animation: fadeIn 1.2s ease-in-out;
     }}
+    .main-tab-container {{
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 0 20px rgba(0,0,0,0.12);
+        animation: fadeIn 0.8s ease-in-out;
+    }}
+    .info-box {{
+        background: rgba(255, 255, 255, 0.65);
+        border-radius: 12px;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    }}
     h1, h2, h3 {{
         color: #4A0072;
         text-shadow: 1px 1px #ffffff;
@@ -71,7 +87,7 @@ def set_background(image_path):
     st.markdown(css, unsafe_allow_html=True)
 
 # set image as background
-bg_path = os.path.join(os.path.dirname(__file__), "miko.jpg")
+bg_path = os.path.join(os.path.dirname(__file__), "lucy.png")
 if os.path.exists(bg_path):
     set_background(bg_path)
 
@@ -82,33 +98,44 @@ df = load_and_clean_data()
 tabs = st.tabs(["🏠 HOME", "🔬 PROTOTYPE", "📬 CONTACT"])
 
 with tabs[0]:
-    st.markdown("<div class='main-container'>", unsafe_allow_html=True)
+    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
     st.title("Credit Card Fraud Detection Tool")
+    
+    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
     st.markdown("""
     ### 🚀 This tool leverages **XGBoost** to detect fraudulent credit card transactions.
 
+    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
     #### 📂 Dataset Info:
+    st.markdown("""
     - This dataset involves real-world anonymized credit card data.
     - It has 31 features: principal components, amount, class.
     - Note: The dataset is highly imbalanced: only ~0.17% fraud cases.
+    """, unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
+    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
     #### 💡 Purpose:
+    st.markdown("""
     This prototype helps analysts:
     - Explore data visually
     - Train a fraud detection model
     - View model evaluation metrics
     """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
+    
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # home tab
 with tabs[1]:
-    st.markdown("<div class='main-container'>", unsafe_allow_html=True)
+    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
+    
     st.subheader("📊 Dataset & EDA")
-
     if st.toggle("📁 Preview Dataset Head"):
         st.dataframe(df.head(), use_container_width=True)
 
     with st.expander("📊 Run Exploratory Data Analysis (EDA)"):
+        with st.spinner("Running EDA..."):
         explore_data(df)
 
     st.subheader("⚙️ Train Fraud Detection Model")
@@ -164,7 +191,7 @@ with tabs[1]:
 
 # contact info tab
 with tabs[2]:
-    st.markdown("<div class='main-container'>", unsafe_allow_html=True)
+    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
     st.title("📬 Contact")
     st.markdown("""
     **Developer**: Shinkairu  
