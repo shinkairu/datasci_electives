@@ -33,7 +33,7 @@ def set_background(image_path):
         background-repeat: no-repeat;
     }}
     .main-tab-container {{
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.65);
         border-radius: 20px;
         padding: 2rem;
         margin: 2rem 0;
@@ -41,7 +41,7 @@ def set_background(image_path):
         animation: fadeIn 1.2s ease-in-out;
     }}
     .info-box {{
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.65);
         border-left: 6px solid #7b1fa2;
         padding: 1.5rem;
         margin-top: 1.5rem;
@@ -91,45 +91,42 @@ df = load_and_clean_data()
 tabs = st.tabs(["🏠 HOME", "🔬 PROTOTYPE", "📬 CONTACT"])
 
 with tabs[0]:
-    st.markdown("""
-<div class='info-box'>
-    <h3>✅ Test Box</h3>
-    <p>This is a test to see if the CSS box works.</p>
-</div>
-""", unsafe_allow_html=True)
-    
     st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
     st.title("Credit Card Fraud Detection Tool")
-    
-    # Intro Description
-    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
+
+    # Description
     st.markdown("""
-    ### 🚀 This tool leverages **XGBoost** to detect fraudulent credit card transactions.
+    <div class='info-box'>
+        <h3>🚀 Description</h3>
+        <p>This tool leverages <strong>XGBoost</strong> to detect fraudulent credit card transactions using a real-world dataset.</p>
+    </div>
     """, unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
 
     # Dataset Info
-    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
     st.markdown("""
-    #### 📂 Dataset Info:
-    - This dataset involves real-world anonymized credit card data.
-    - It has 31 features: principal components, amount, class.
-    - Note: The dataset is highly imbalanced: only ~0.17% fraud cases.
+    <div class='info-box'>
+        <h4>📂 Dataset Info</h4>
+        <ul>
+            <li>This dataset involves real-world anonymized credit card data.</li>
+            <li>It includes 31 features: principal components, amount, and class.</li>
+            <li>Note: The dataset is highly imbalanced: only ~0.17% fraud cases.</li>
+        </ul>
+    </div>
     """, unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
 
     # Purpose
-    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
     st.markdown("""
-    #### 💡 Purpose:
-    This prototype helps analysts:
-    - Explore data visually  
-    - Train a fraud detection model  
-    - View model evaluation metrics  
+    <div class='info-box'>
+        <h4>💡 Purpose</h4>
+        <p>This prototype helps analysts:</p>
+        <ul>
+            <li>Explore data visually</li>
+            <li>Train a fraud detection model</li>
+            <li>View model evaluation metrics</li>
+        </ul>
+    </div>
     """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
-
-    st.markdown("</div>", unsafe_allow_html=True) 
 
 # home tab
 with tabs[1]:
@@ -196,12 +193,14 @@ with tabs[1]:
 
 # contact info tab
 with tabs[2]:
-    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
-    st.title("📬 Contact")
-    
-    st.markdown("**Developer**: Shinkairu", unsafe_allow_html=True)
-    st.markdown("**GitHub**: [github.com/shinkairu](https://github.com/shinkairu)", unsafe_allow_html=True)
-    st.markdown("**Email**: your_email@example.com", unsafe_allow_html=True)
-    st.markdown("> This is a sample Streamlit prototype developed for educational and demonstration purposes.", unsafe_allow_html=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class='main-tab-container'>
+        <h1>📬 Contact</h1>
+        <div class='info-box'>
+            <p><strong>Developer</strong>: Shinkairu</p>
+            <p><strong>GitHub</strong>: <a href='https://github.com/shinkairu' target='_blank'>github.com/shinkairu</a></p>
+            <p><strong>Email</strong>: your_email@example.com</p>
+            <blockquote>This is a sample Streamlit prototype developed for educational and demonstration purposes.</blockquote>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
