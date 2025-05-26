@@ -139,7 +139,7 @@ with tabs[1]:
 
     with st.expander("📊 Run Exploratory Data Analysis (EDA)"):
         with st.spinner("Running EDA..."):
-        explore_data(df)
+            explore_data(df)
 
     st.subheader("⚙️ Train Fraud Detection Model")
     target = "Class"
