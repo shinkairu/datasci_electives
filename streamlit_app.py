@@ -71,11 +71,9 @@ def set_background(image_path):
     st.markdown(css, unsafe_allow_html=True)
 
 # set image as background
-background_path = os.path.join(os.path.dirname(__file__), "lucy.png")
-if os.path.exists(background_path):
-    set_background(background_path)
-else:
-    st.warning("⚠️ Background image 'lucy.png' not found.")
+bg_path = os.path.join(os.path.dirname(__file__), "lucy.png")
+if os.path.exists(bg_path):
+    set_background(bg_path)
 
 # load and preview cleaned data
 df = load_and_clean_data()
@@ -138,19 +136,25 @@ with tabs[1]:
     if st.session_state.get("trained", False):
         st.subheader("📈 Model Evaluation & Results")
 
-        model = st.session_state.model
-        X_test = st.session_state.X_test
-        y_test = st.session_state.y_test
+        if st.toggle("📋 Show Evaluation Report & Graphs"):
+            model = st.session_state.model
+            X_test = st.session_state.X_test
+            y_test = st.session_state.y_test
 
-        if st.toggle("📋 Show Evaluation Report and Plots"):
             report_df = evaluate_model(model, X_test, y_test)
-
             st.markdown("### 📋 Classification Report")
             st.dataframe(report_df, use_container_width=True)
 
+            # Add visualizations here
+            st.markdown("### 📊 Confusion Matrix")
+            st.pyplot(plot_confusion_matrix(model, X_test, y_test))
+
+            st.markdown("### 📈 ROC Curve")
+            st.pyplot(plot_roc_curve(model, X_test, y_test))
+
             csv = download_results(report_df)
             b64 = base64.b64encode(csv.encode()).decode()
-            href = f'<a href="data:file/csv;base64,{b64}" download="lucy_fraud_report.csv">📥 Download CSV</a>'
+            href = f'<a href="data:file/csv;base64,{b64}" download="fraud_report.csv">📥 Download CSV</a>'
             st.markdown(href, unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
