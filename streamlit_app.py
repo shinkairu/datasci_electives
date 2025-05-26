@@ -147,7 +147,7 @@ with tabs[1]:
 
             # Add visualizations here
             st.markdown("### 📊 Confusion Matrix")
-            st.pyplot(plot_cm(model, X_test, y_test))
+            st.pyplot(plot_confusion_matrix(model, X_test, y_test))
 
             st.markdown("### 📈 ROC Curve")
             st.pyplot(plot_roc_curve(model, X_test, y_test))
