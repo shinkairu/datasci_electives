@@ -33,7 +33,7 @@ def set_background(image_path):
         background-repeat: no-repeat;
     }}
     .main-container {{
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.85);
         border-radius: 16px;
         padding: 3rem;
         margin-top: 2rem;
@@ -41,20 +41,20 @@ def set_background(image_path):
         animation: fadeIn 1.2s ease-in-out;
     }}
     .main-tab-container {{
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.85);
         padding: 2rem;
-        margin-top: 1.5rem;
+        border-radius: 20px;
         margin-bottom: 2rem;
-        box-shadow: 0 0 20px rgba(0,0,0,0.12);
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
         animation: fadeIn 0.8s ease-in-out;
     }}
     .info-box {{
-        background: rgba(255, 255, 255, 0.65);
-        border-radius: 12px;
-        padding: 1.2rem 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 0 10px rgba(0,0,0,0.08);
+        background: rgba(255, 255, 255, 0.95);
+        border-left: 6px solid #7b1fa2;
+        padding: 1.5rem 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }}
     h1, h2, h3 {{
         color: #4A0072;
@@ -103,27 +103,27 @@ with tabs[0]:
 
     st.markdown("<div class='info-box'>", unsafe_allow_html=True)
     st.markdown("""
-    ### 🚀 This tool leverages **XGBoost** to detect fraudulent credit card transactions.
-    """, unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
-    
-    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
-    st.markdown("""
-    #### 📂 Dataset Info:
-    - This dataset involves real-world anonymized credit card data.
-    - It has 31 features: principal components, amount, class.
-    - Note: The dataset is highly imbalanced: only ~0.17% fraud cases.
+    ### 🚀 Description
+    This tool leverages **XGBoost** to detect fraudulent credit card transactions.
     """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Purpose
     st.markdown("<div class='info-box'>", unsafe_allow_html=True)
     st.markdown("""
-    #### 💡 Purpose:
-    This prototype helps analysts:
+    ### 📂 Dataset Info
+    - Real-world anonymized credit card transaction data  
+    - 31 total features (28 PCA components + Amount + Time + Class)  
+    - Highly imbalanced: only ~0.17% fraud cases  
+    """, unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
+    st.markdown("""
+    ### 💡 Purpose
+    This prototype helps analysts:  
     - Explore data visually  
     - Train a fraud detection model  
-    - View model evaluation metrics  
+    - Evaluate model results effectively  
     """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -196,10 +196,15 @@ with tabs[1]:
 with tabs[2]:
     st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
     st.title("📬 Contact")
-    
-    st.markdown("**Developer**: Shinkairu", unsafe_allow_html=True)
-    st.markdown("**GitHub**: [github.com/shinkairu](https://github.com/shinkairu)", unsafe_allow_html=True)
-    st.markdown("**Email**: your_email@example.com", unsafe_allow_html=True)
-    st.markdown("> This is a sample Streamlit prototype developed for educational and demonstration purposes.", unsafe_allow_html=True)
+
+    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
+    st.markdown("""
+    **Developer**: Shinkairu  
+    **GitHub**: [github.com/shinkairu](https://github.com/shinkairu)  
+    **Email**: your_email@example.com  
+
+    > This is a sample Streamlit prototype developed for educational and demonstration purposes.
+    """, unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
