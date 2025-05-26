@@ -71,7 +71,7 @@ def set_background(image_path):
     st.markdown(css, unsafe_allow_html=True)
 
 # set image as background
-bg_path = os.path.join(os.path.dirname(__file__), "lucy.png")
+bg_path = os.path.join(os.path.dirname(__file__), "miko.jpg")
 if os.path.exists(bg_path):
     set_background(bg_path)
 
@@ -147,7 +147,7 @@ with tabs[1]:
 
             # Add visualizations here
             st.markdown("### 📊 Confusion Matrix")
-            st.pyplot(plot_confusion_matrix(model, X_test, y_test))
+            st.pyplot(plot_cm(model, X_test, y_test))
 
             st.markdown("### 📈 ROC Curve")
             st.pyplot(plot_roc_curve(model, X_test, y_test))
