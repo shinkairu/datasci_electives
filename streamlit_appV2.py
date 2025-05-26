@@ -1,20 +1,29 @@
 import streamlit as st
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
-import pandas as pd
-import base64
-import os
+
 import sys
+import os
+
+sys.path.append(os.path.dirname(__file__))
+from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
+
+import base64
+from PIL import Image
+
+# Add project directory to path
+sys.path.append(os.path.dirname(__file__))
+from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
 
 # --- Page Config ---
-st.set_page_config(page_title="Lucy’s AI Fraud Detector 💳", layout="wide")
+st.set_page_config(page_title="Credit Card Fraud Detector 💳", layout="wide")
 
 # --- Background image setup ---
 @st.cache(allow_output_mutation=True)
 def get_base64_of_bin_file(image_path):
     with open(image_path, 'rb') as f:
         return base64.b64encode(f.read()).decode()
-        
+
 def set_background(image_path):
     bin_str = get_base64_of_bin_file(image_path)
     css = f"""
@@ -36,6 +45,7 @@ def set_background(image_path):
     h1, h2, h3 {{
         color: #4A0072;
         text-shadow: 1px 1px #ffffff;
+        font-size: 2.2em;
     }}
     .stButton>button {{
         background-color: #7b1fa2;
@@ -44,15 +54,35 @@ def set_background(image_path):
         padding: 10px 24px;
         font-size: 20px;
     }}
+    
+    html, body, p, div {{
+        color: #2e003e !important;  /* Dark purple text */
+        font-size: 18px !important;  /* Larger base font */
+        font-family: 'Segoe UI', sans-serif;
+    }}
+    
+    .stButton>button {{
+        background-color: #7b1fa2;
+        color: white;
+        border-radius: 10px;
+        padding: 10px 24px;
+        font-size: 20px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }}
+
     .stButton>button:hover {{
         background-color: #4a0072;
     }}
+    
+
     @keyframes fadeIn {{
         from {{ opacity: 0; transform: translateY(20px); }}
         to {{ opacity: 1; transform: translateY(0); }}
     }}
     </style>
     """
+    
     st.markdown(css, unsafe_allow_html=True)
 
 # --- Set background ---
