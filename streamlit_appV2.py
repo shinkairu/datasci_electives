@@ -9,6 +9,46 @@ import sys
 # --- Page Config ---
 st.set_page_config(page_title="Lucy’s AI Fraud Detector 💳", layout="wide")
 
+def set_background(image_path):
+    bin_str = get_base64_of_bin_file(image_path)
+    css = f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/png;base64,{bin_str}");
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }}
+    .main-container {{
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 16px;
+        padding: 3rem;
+        margin-top: 2rem;
+        box-shadow: 0 0 25px rgba(0,0,0,0.15);
+        animation: fadeIn 1.2s ease-in-out;
+    }}
+    h1, h2, h3 {{
+        color: #4A0072;
+        text-shadow: 1px 1px #ffffff;
+    }}
+    .stButton>button {{
+        background-color: #7b1fa2;
+        color: white;
+        border-radius: 10px;
+        padding: 10px 24px;
+        font-size: 20px;
+    }}
+    .stButton>button:hover {{
+        background-color: #4a0072;
+    }}
+    @keyframes fadeIn {{
+        from {{ opacity: 0; transform: translateY(20px); }}
+        to {{ opacity: 1; transform: translateY(0); }}
+    }}
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)
+
 # --- Set background ---
 background_path = os.path.join(os.path.dirname(__file__), "lucy.png")
 if os.path.exists(background_path):
