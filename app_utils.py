@@ -1,11 +1,11 @@
-# libraries and other utility stuffs
 # === app_utils.py ===
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import (
-    classification_report, confusion_matrix, RocCurveDisplay,
+    confusion_matrix, ConfusionMatrixDisplay, RocCurveDisplay,
     accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 )
 from xgboost import plot_importance
@@ -71,34 +71,31 @@ def evaluate_model(model, X_test, y_test):
         'Score': [acc, prec, rec, f1, auc]
     })
 
-    plt.figure(figsize=(8, 5))
-    sns.barplot(x='Metric', y='Score', data=metrics_df, palette="Purples_r")
-    plt.ylim(0, 1)
-    plt.title("Model Evaluation Metrics")
-    plt.tight_layout()
-    plt.show()
+    return metrics_df
 
-    cm = confusion_matrix(y_test, y_pred)
-    plt.figure(figsize=(5, 4))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Purples',
-                xticklabels=["Legit", "Fraud"],
-                yticklabels=["Legit", "Fraud"])
-    plt.title("Confusion Matrix")
-    plt.tight_layout()
-    plt.show()
 
-    RocCurveDisplay.from_estimator(model, X_test, y_test)
-    plt.title("ROC Curve")
-    plt.grid(True, linestyle='--', alpha=0.5)
-    plt.tight_layout()
-    plt.show()
-
+def show_feature_importance(model):
+    plt.figure(figsize=(10, 6))
     plot_importance(model, importance_type='gain', max_num_features=10,
                     title='Top 10 Important Features', color='#8e44ad')
     plt.tight_layout()
     plt.show()
 
-    return metrics_df
+
+def plot_confusion_matrix(model, X_test, y_test):
+    preds = model.predict(X_test)
+    cm = confusion_matrix(y_test, preds)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    fig, ax = plt.subplots()
+    disp.plot(ax=ax)
+    return fig
+
+
+def plot_roc_curve(model, X_test, y_test):
+    fig, ax = plt.subplots()
+    RocCurveDisplay.from_estimator(model, X_test, y_test, ax=ax)
+    return fig
+
 
 def download_results(report_df):
     return report_df.to_csv(index=False)
