@@ -112,7 +112,6 @@ def set_background(image_path):
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
-    st.markdown(tabs_css, unsafe_allow_html=True)
     
 # set image as background
 bg_path = os.path.join(os.path.dirname(__file__), "lucy.png")
