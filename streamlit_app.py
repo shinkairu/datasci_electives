@@ -49,6 +49,27 @@ def set_background(image_path):
         border-radius: 15px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }}
+    .tab-selector {{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2rem 0;
+    }}
+    .tab-button {{
+        background: rgba(255, 255, 255, 0.95);
+        border-left: 6px solid #7b1fa2;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+    }}
+    .tab-button:hover {{
+        transform: scale(1.05);
+    }}
     h1, h2, h3 {{
         color: #4A0072;
         text-shadow: 1px 1px #ffffff;
@@ -88,12 +109,17 @@ if os.path.exists(bg_path):
 df = load_and_clean_data()
 
 # tabs
-tabs = st.tabs(["🏠 HOME", "🔬 PROTOTYPE", "📬 CONTACT"])
+tab = st.radio(
+    "", ["🏠 HOME", "🔬 PROTOTYPE", "📬 CONTACT"],
+    horizontal=True,
+    index=0,
+    key="main_tabs"
+)
 
-with tabs[0]:
-    st.title("Credit Card Fraud Detection Tool 💳")
+if tab == "🏠 HOME":
+    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
+    st.title("Credit Card Fraud Detection Tool")
 
-    # Description
     st.markdown("""
     <div class='info-box'>
         <h3>🚀 Description</h3>
@@ -101,7 +127,7 @@ with tabs[0]:
     </div>
     """, unsafe_allow_html=True)
 
-    # Dataset Info
+    # dataset info
     st.markdown("""
     <div class='info-box'>
         <h4>📂 Dataset Info</h4>
@@ -113,7 +139,7 @@ with tabs[0]:
     </div>
     """, unsafe_allow_html=True)
 
-    # Purpose
+    # purpose
     st.markdown("""
     <div class='info-box'>
         <h4>💡 Purpose</h4>
@@ -128,7 +154,7 @@ with tabs[0]:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # home tab
-with tabs[1]:
+elif tab == "🔬 PROTOTYPE":
     st.title("📊 Dataset & EDA")
     if st.toggle("📁 Preview Dataset Head"):
         st.dataframe(df.head(), use_container_width=True)
@@ -180,7 +206,7 @@ with tabs[1]:
             st.pyplot(plot_roc_curve(model, X_test, y_test))
             
             st.markdown("### 🔍 Feature Importance")
-            show_feature_importance(model)
+            st.pyplot(show_feature_importance(model))
 
             csv = download_results(report_df)
             b64 = base64.b64encode(csv.encode()).decode()
@@ -190,15 +216,15 @@ with tabs[1]:
     st.markdown("</div>", unsafe_allow_html=True)
 
 # contact info tab
-with tabs[2]:
+elif tab == "📬 CONTACT":
+    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
+    st.title("📬 Contact")
     st.markdown("""
-    <div class='main-tab-container'>
-        <h1>📬 Contact</h1>
-        <div class='info-box'>
-            <p><strong>Developer</strong>: Shinkairu</p>
-            <p><strong>GitHub</strong>: <a href='https://github.com/shinkairu' target='_blank'>github.com/shinkairu</a></p>
-            <p><strong>Email</strong>: your_email@example.com</p>
-            <blockquote>This is a sample Streamlit prototype developed for educational and demonstration purposes.</blockquote>
-        </div>
+    <div class='info-box'>
+        <p><strong>Developer:</strong> Shinkairu</p>
+        <p><strong>GitHub:</strong> <a href='https://github.com/shinkairu' target='_blank'>github.com/shinkairu</a></p>
+        <p><strong>Email:</strong> shinka1ru@gmail.com</p>
+        <blockquote>This is only a sample Streamlit prototype developed for our CpE Elective project for Data Science! Thank you!.</blockquote>
     </div>
     """, unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
