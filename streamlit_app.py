@@ -78,11 +78,47 @@ def set_background(image_path):
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
+    
+    tabs_css = """
+    <style>
+    /* Center the tabs container */
+    .css-1bzp7po {{
+        justify-content: center !important;
+    }}
 
+    /* Style individual tab buttons */
+    button[data-baseweb="tab"] {{
+        background-color: rgba(255, 255, 255, 0.65);
+        border: 2px solid #7b1fa2;
+        color: #4A0072;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 12px;
+        margin: 5px;
+        transition: all 0.3s ease;
+    }}
+
+    button[data-baseweb="tab"]:hover {{
+        background-color: #e1bee7;
+        border-color: #4a0072;
+        color: #2e003e;
+    }}
+
+    button[data-baseweb="tab"][aria-selected="true"] {{
+        background-color: #7b1fa2;
+        color: white;
+        border-color: #4a0072;
+    }}
+    </style>
+    """
+    st.markdown(tabs_css, unsafe_allow_html=True)
+    
 # set image as background
 bg_path = os.path.join(os.path.dirname(__file__), "lucy.png")
 if os.path.exists(bg_path):
     set_background(bg_path)
+
+st.markdown(tabs_css, unsafe_allow_html=True)
 
 # load and preview cleaned data
 df = load_and_clean_data()
