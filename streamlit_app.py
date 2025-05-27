@@ -32,9 +32,11 @@ def set_background(image_path):
         background-attachment: fixed;
         background-repeat: no-repeat;
     }}
+
     .css-1bzp7po {{
         justify-content: center !important;
     }}
+
     button[data-baseweb="tab"] {{
         background-color: rgba(255, 255, 255, 0.65);
         border: 2px solid #7b1fa2;
@@ -45,16 +47,19 @@ def set_background(image_path):
         margin: 5px;
         transition: all 0.3s ease;
     }}
+
     button[data-baseweb="tab"]:hover {{
         background-color: #e1bee7;
         border-color: #4a0072;
         color: #2e003e;
     }}
+
     button[data-baseweb="tab"][aria-selected="true"] {{
         background-color: #7b1fa2;
         color: white;
         border-color: #4a0072;
     }}
+
     .main-tab-container {{
         background: rgba(255, 255, 255, 0.65);
         border-radius: 20px;
@@ -63,6 +68,7 @@ def set_background(image_path):
         box-shadow: 0 0 25px rgba(0,0,0,0.15);
         animation: fadeIn 1.2s ease-in-out;
     }}
+
     .info-box {{
         background: rgba(255, 255, 255, 0.65);
         border-left: 6px solid #7b1fa2;
@@ -72,16 +78,19 @@ def set_background(image_path):
         border-radius: 15px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }}
+
     h1, h2, h3 {{
         color: #4A0072;
         text-shadow: 1px 1px #ffffff;
         font-size: 2.5em;
     }}
+
     html, body, p, div {{
         color: #2e003e !important;
         font-size: 18px !important;
         font-family: 'Segoe UI', sans-serif;
     }}
+
     .stButton>button {{
         background-color: #7b1fa2;
         color: white;
@@ -91,9 +100,11 @@ def set_background(image_path):
         font-weight: bold;
         transition: background-color 0.3s ease;
     }}
+
     .stButton>button:hover {{
         background-color: #4a0072;
     }}
+
     @keyframes fadeIn {{
         from {{ opacity: 0; transform: translateY(20px); }}
         to {{ opacity: 1; transform: translateY(0); }}
