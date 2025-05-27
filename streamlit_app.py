@@ -170,8 +170,6 @@ with tabs[1]:
     with st.expander("📊 Run Exploratory Data Analysis (EDA)"):
         with st.spinner("Running EDA..."):
             explore_data(df)
-            
-    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
     
     st.subheader("⚙️ Train Fraud Detection Model")
     target = "Class"
