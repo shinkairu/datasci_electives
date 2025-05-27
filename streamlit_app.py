@@ -229,10 +229,10 @@ with tabs[2]:
     <div class='main-tab-container'>
         <h1>📬 Contact</h1>
         <div class='info-box'>
-            <p><strong>Developer</strong>: Shinkairu</p>
+            <p><strong>Developed by:</strong>: Alexine, Lyca, Fredric and Kit ^^ </p>
             <p><strong>GitHub</strong>: <a href='https://github.com/shinkairu' target='_blank'>github.com/shinkairu</a></p>
-            <p><strong>Email</strong>: your_email@example.com</p>
-            <blockquote>This is a sample Streamlit prototype developed for educational and demonstration purposes.</blockquote>
+            <p><strong>Email</strong>: bestgroupever@gmail.com</p>
+            <blockquote>This is only a sample Streamlit prototype developed for our CpE Elective (Data Science) Project.Thank you!</blockquote>
         </div>
     </div>
     """, unsafe_allow_html=True)
