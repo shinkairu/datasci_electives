@@ -11,7 +11,6 @@ from sklearn.metrics import (
 from xgboost import plot_importance
 import kagglehub
 
-
 def load_and_clean_data():
     path = kagglehub.dataset_download("mlg-ulb/creditcardfraud")
     df = pd.read_csv(f"{path}/creditcard.csv")
@@ -19,7 +18,6 @@ def load_and_clean_data():
     df['Amount'] = StandardScaler().fit_transform(df[['Amount']])
     df.drop(columns='Time', inplace=True)
     return df
-
 
 def explore_data(df):
     sns.set(style="whitegrid")
@@ -55,7 +53,6 @@ def explore_data(df):
     plt.suptitle("Top 3 Features by Class", y=1.02)
     plt.show()
 
-
 def evaluate_model(model, X_test, y_test):
     y_pred = model.predict(X_test)
     y_prob = model.predict_proba(X_test)[:, 1]
@@ -70,17 +67,23 @@ def evaluate_model(model, X_test, y_test):
         'Metric': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'ROC-AUC'],
         'Score': [acc, prec, rec, f1, auc]
     })
-
     return metrics_df
 
-
+def show_metric_bar_chart(metrics_dict):
+    df = pd.DataFrame(list(metrics_dict.items()), columns=["Metric", "Score"])
+    fig, ax = plt.subplots()
+    sns.barplot(x='Metric', y='Score', data=df, palette="Purples_r", ax=ax)
+    ax.set_ylim(0, 1)
+    ax.set_title("Model Evaluation Metrics")
+    ax.grid(axis='y', linestyle='--', alpha=0.6)
+    return fig
+    
 def show_feature_importance(model):
     fig, ax = plt.subplots(figsize=(10, 6))
     plot_importance(model, importance_type='gain', max_num_features=10,
                     title='Top 10 Important Features', color='#8e44ad', ax=ax)
     plt.tight_layout()
     return fig
-
 
 def plot_confusion_matrix(model, X_test, y_test):
     preds = model.predict(X_test)
@@ -90,12 +93,10 @@ def plot_confusion_matrix(model, X_test, y_test):
     disp.plot(ax=ax)
     return fig
 
-
 def plot_roc_curve(model, X_test, y_test):
     fig, ax = plt.subplots()
     RocCurveDisplay.from_estimator(model, X_test, y_test, ax=ax)
     return fig
-
 
 def download_results(report_df):
     return report_df.to_csv(index=False)
