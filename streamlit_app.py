@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(__file__))    # custom utilitiy function for bet
 from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
 
 sys.path.append(os.path.dirname(__file__))
-from app_utils import load_and_clean_data, explore_data, evaluate_model, show_metric_bar_chart, plot_confusion_matrix, plot_roc_curve, show_feature_importance, download_results
+from app_utils import load_and_clean_data, explore_data, evaluate_model, plot_confusion_matrix, plot_roc_curve, show_feature_importance, download_results
 
 # page configuration
 st.set_page_config(page_title="Credit Card Fraud Detector 💳", layout="wide")
@@ -114,7 +114,7 @@ def set_background(image_path):
     st.markdown(css, unsafe_allow_html=True)
     
 # set image as background
-bg_path = os.path.join(os.path.dirname(__file__), "lucy.png")
+bg_path = os.path.join(os.path.dirname(__file__), "purp.jpg")
 if os.path.exists(bg_path):
     set_background(bg_path)
 
@@ -206,9 +206,6 @@ with tabs[1]:
             report_df = evaluate_model(model, X_test, y_test)
             st.markdown("### 📋 Classification Report")
             st.dataframe(report_df, use_container_width=True)
-
-            st.write("### 📈 Evaluation Metrics")
-            st.pyplot(show_metric_bar_chart(metrics_dict))
 
             st.markdown("### 📊 Confusion Matrix")
             st.pyplot(plot_confusion_matrix(model, X_test, y_test))
