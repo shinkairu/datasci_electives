@@ -208,7 +208,7 @@ with tabs[1]:
             st.dataframe(report_df, use_container_width=True)
 
             st.write("### 📈 Evaluation Metrics")
-            st.pyplot(show_metric_bar_chart(metrics))
+            st.pyplot(show_metric_bar_chart(metrics_dict))
 
             st.markdown("### 📊 Confusion Matrix")
             st.pyplot(plot_confusion_matrix(model, X_test, y_test))
