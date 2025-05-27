@@ -112,13 +112,12 @@ def set_background(image_path):
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
+    st.markdown(tabs_css, unsafe_allow_html=True)
     
 # set image as background
 bg_path = os.path.join(os.path.dirname(__file__), "lucy.png")
 if os.path.exists(bg_path):
     set_background(bg_path)
-
-st.markdown(css, unsafe_allow_html=True)
 
 # load and preview cleaned data
 df = load_and_clean_data()
