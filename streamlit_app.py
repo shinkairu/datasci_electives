@@ -49,6 +49,22 @@ def set_background(image_path):
         border-radius: 15px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     }}
+    .custom-tab-header {{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }}
+    .custom-tab-header .info-box {{
+        padding: 1rem 2rem;
+        text-align: center;
+        cursor: default;
+        transition: transform 0.2s ease;
+    }}
+    .custom-tab-header .info-box:hover {{
+        transform: scale(1.05);
+    }}
     h1, h2, h3 {{
         color: #4A0072;
         text-shadow: 1px 1px #ffffff;
@@ -88,7 +104,13 @@ if os.path.exists(bg_path):
 df = load_and_clean_data()
 
 # tabs
-tabs = st.tabs(["🏠 HOME", "🔬 PROTOTYPE", "📬 CONTACT"])
+st.markdown("""
+<div class='custom-tab-header'>
+    <div class='info-box'><h3>🏠 HOME</h3></div>
+    <div class='info-box'><h3>🔬 PROTOTYPE</h3></div>
+    <div class='info-box'><h3>📬 CONTACT</h3></div>
+</div>
+""", unsafe_allow_html=True)
 
 with tabs[0]:
     st.title("Credit Card Fraud Detection Tool 💳")
