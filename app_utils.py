@@ -75,11 +75,11 @@ def evaluate_model(model, X_test, y_test):
 
 
 def show_feature_importance(model):
-    plt.figure(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 6))
     plot_importance(model, importance_type='gain', max_num_features=10,
-                    title='Top 10 Important Features', color='#8e44ad')
+                    title='Top 10 Important Features', color='#8e44ad', ax=ax)
     plt.tight_layout()
-    plt.show()
+    return fig
 
 
 def plot_confusion_matrix(model, X_test, y_test):
