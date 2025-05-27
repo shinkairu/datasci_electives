@@ -207,6 +207,9 @@ with tabs[1]:
             st.markdown("### 📋 Classification Report")
             st.dataframe(report_df, use_container_width=True)
 
+            st.write("### 📈 Evaluation Metrics")
+            st.pyplot(show_metric_bar_chart(metrics))
+
             st.markdown("### 📊 Confusion Matrix")
             st.pyplot(plot_confusion_matrix(model, X_test, y_test))
 
