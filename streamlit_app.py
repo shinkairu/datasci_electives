@@ -13,10 +13,10 @@ from app_utils import load_and_clean_data, explore_data, evaluate_model, downloa
 sys.path.append(os.path.dirname(__file__))
 from app_utils import load_and_clean_data, explore_data, evaluate_model, plot_confusion_matrix, plot_roc_curve, show_feature_importance, download_results
 
-# --- Page Config ---
+# page configuration
 st.set_page_config(page_title="Credit Card Fraud Detector 💳", layout="wide")
 
-# --- Background image setup ---
+# background image setup
 @st.cache(allow_output_mutation=True)
 def get_base64_of_bin_file(image_path):
     with open(image_path, 'rb') as f:
@@ -48,27 +48,6 @@ def set_background(image_path):
         margin-bottom: 1.5rem;
         border-radius: 15px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    }}
-    .tab-selector {{
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin: 2rem 0;
-    }}
-    .tab-button {{
-        background: rgba(255, 255, 255, 0.95);
-        border-left: 6px solid #7b1fa2;
-        padding: 1rem 2rem;
-        border-radius: 15px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        cursor: pointer;
-        transition: transform 0.2s ease;
-        text-align: center;
-        font-weight: bold;
-        font-size: 18px;
-    }}
-    .tab-button:hover {{
-        transform: scale(1.05);
     }}
     h1, h2, h3 {{
         color: #4A0072;
@@ -109,17 +88,12 @@ if os.path.exists(bg_path):
 df = load_and_clean_data()
 
 # tabs
-tab = st.radio(
-    "", ["🏠 HOME", "🔬 PROTOTYPE", "📬 CONTACT"],
-    horizontal=True,
-    index=0,
-    key="main_tabs"
-)
+tabs = st.tabs(["🏠 HOME", "🔬 PROTOTYPE", "📬 CONTACT"])
 
-if tab == "🏠 HOME":
-    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
-    st.title("Credit Card Fraud Detection Tool")
+with tabs[0]:
+    st.title("Credit Card Fraud Detection Tool 💳")
 
+    # Description
     st.markdown("""
     <div class='info-box'>
         <h3>🚀 Description</h3>
@@ -127,7 +101,7 @@ if tab == "🏠 HOME":
     </div>
     """, unsafe_allow_html=True)
 
-    # dataset info
+    # Dataset Info
     st.markdown("""
     <div class='info-box'>
         <h4>📂 Dataset Info</h4>
@@ -139,7 +113,7 @@ if tab == "🏠 HOME":
     </div>
     """, unsafe_allow_html=True)
 
-    # purpose
+    # Purpose
     st.markdown("""
     <div class='info-box'>
         <h4>💡 Purpose</h4>
@@ -154,7 +128,7 @@ if tab == "🏠 HOME":
     st.markdown("</div>", unsafe_allow_html=True)
 
 # home tab
-elif tab == "🔬 PROTOTYPE":
+with tabs[1]:
     st.title("📊 Dataset & EDA")
     if st.toggle("📁 Preview Dataset Head"):
         st.dataframe(df.head(), use_container_width=True)
@@ -216,15 +190,15 @@ elif tab == "🔬 PROTOTYPE":
     st.markdown("</div>", unsafe_allow_html=True)
 
 # contact info tab
-elif tab == "📬 CONTACT":
-    st.markdown("<div class='main-tab-container'>", unsafe_allow_html=True)
-    st.title("📬 Contact")
+with tabs[2]:
     st.markdown("""
-    <div class='info-box'>
-        <p><strong>Developer:</strong> Shinkairu</p>
-        <p><strong>GitHub:</strong> <a href='https://github.com/shinkairu' target='_blank'>github.com/shinkairu</a></p>
-        <p><strong>Email:</strong> shinka1ru@gmail.com</p>
-        <blockquote>This is only a sample Streamlit prototype developed for our CpE Elective project for Data Science! Thank you!.</blockquote>
+    <div class='main-tab-container'>
+        <h1>📬 Contact</h1>
+        <div class='info-box'>
+            <p><strong>Developer</strong>: Shinkairu</p>
+            <p><strong>GitHub</strong>: <a href='https://github.com/shinkairu' target='_blank'>github.com/shinkairu</a></p>
+            <p><strong>Email</strong>: your_email@example.com</p>
+            <blockquote>This is a sample Streamlit prototype developed for educational and demonstration purposes.</blockquote>
+        </div>
     </div>
     """, unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
