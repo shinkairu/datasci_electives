@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(__file__))    # custom utilitiy function for bet
 from app_utils import load_and_clean_data, explore_data, evaluate_model, download_results
 
 sys.path.append(os.path.dirname(__file__))
-from app_utils import load_and_clean_data, explore_data, evaluate_model, plot_confusion_matrix, plot_roc_curve, show_feature_importance, download_results
+from app_utils import load_and_clean_data, explore_data, evaluate_model, show_metric_bar_chart, plot_confusion_matrix, plot_roc_curve, show_feature_importance, download_results
 
 # page configuration
 st.set_page_config(page_title="Credit Card Fraud Detector 💳", layout="wide")
