@@ -135,7 +135,7 @@ with tabs[0]:
     </div>
     """, unsafe_allow_html=True)
 
-    # Dataset Info
+    # Dataset Information
     st.markdown("""
     <div class='info-box'>
         <h4>📂 Dataset Info</h4>
